@@ -68,7 +68,8 @@ vector<int> findPSEE(vector<int> &arr)
     vector<int> psee(n, -1);
     for (int i = 0; i < n; i++)
     {
-        // since we want both previous and equal smaller elements, we use '>' in comparison, not '>='
+        // we want both previous and equal smaller elements, so we use '>' in comparison, not '>='
+        // this is done to avoid double counting of elements as minimum in subarrays
         while (!st.empty() && arr[st.top()] > arr[i])
         {
             st.pop();
