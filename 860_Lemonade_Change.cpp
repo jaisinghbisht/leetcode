@@ -28,6 +28,29 @@ bills[i] is either 5, 10, or 20.
 #include <bits/stdc++.h>
 using namespace std;
 
+/*
+Greedy rationale:
+We only care about how many $5 and $10 bills we have, since $20 bills are never
+used to make change.
+
+For a $10 customer, the only possible change is one $5, so we must give it.
+
+For a $20 customer, we need $15 change. There are only two ways:
+1) one $10 + one $5
+2) three $5s
+
+We greedily prefer option (1) when possible because $5 bills are more valuable
+than $10 bills for future transactions:
+- $5 bills are required to give change to $10 customers
+- $10 bills are only useful for $20 customers
+
+Using a $10 bill first preserves more $5 bills, maximizing flexibility for
+future customers. If we cannot do either option, correct change is impossible.
+
+Since each decision is locally optimal and never hurts future possibilities,
+the greedy strategy works.
+*/
+
 // Time: O(n), Space: O(1)
 bool lemonadeChange(vector<int> &bills)
 {
