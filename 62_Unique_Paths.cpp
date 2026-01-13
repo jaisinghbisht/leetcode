@@ -21,53 +21,45 @@ Constraints:
 #include <bits/stdc++.h>
 using namespace std;
 
-int uniquePathsRecursiveHelper(int r, int c, const int m, const int n, vector<vector<int>> &visited)
+int uniquePathsRecursiveHelper(int r, int c, const int m, const int n)
 {
     if (r == m - 1 && c == n - 1)
         return 1;
-    if (r > m - 1 || c > n - 1 || visited[r][c])
+    if (r > m - 1 || c > n - 1)
         return 0;
-    visited[r][c] = 1;
-    int right = uniquePathsRecursiveHelper(r + 1, c, m, n, visited); // right
-    int down = uniquePathsRecursiveHelper(r, c + 1, m, n, visited);  // down
-    visited[r][c] = 0;
+    int right = uniquePathsRecursiveHelper(r + 1, c, m, n); // right
+    int down = uniquePathsRecursiveHelper(r, c + 1, m, n);  // down
     return right + down;
 }
 
 // Recursive
 // Time Complexity: O(2^(m+n)), where m is the number of rows and n is the number of columns.
-// Space Complexity: O(m+n), for the recursion stack.
+// Space Complexity: O(m+n) for the recursion stack.
 int uniquePathsRecursive(int m, int n)
 {
-    vector<vector<int>> visited(m, vector<int>(n, 0));
-    return uniquePathsRecursiveHelper(0, 0, m, n, visited);
+    return uniquePathsRecursiveHelper(0, 0, m, n);
 }
 
-int uniquePathsMemoizationHelper(int r, int c, const int m, const int n,
-                                 vector<vector<int>> &visited,
-                                 vector<vector<int>> &dp)
+int uniquePathsMemoizationHelper(int r, int c, const int m, const int n, vector<vector<int>> &dp)
 {
     if (r == m - 1 && c == n - 1)
         return 1;
-    if (r > m - 1 || c > n - 1 || visited[r][c])
+    if (r > m - 1 || c > n - 1)
         return 0;
     if (dp[r][c] != -1)
         return dp[r][c];
-    visited[r][c] = 1;
-    int right = uniquePathsMemoizationHelper(r + 1, c, m, n, visited, dp); // right
-    int down = uniquePathsMemoizationHelper(r, c + 1, m, n, visited, dp);  // down
-    visited[r][c] = 0;
+    int right = uniquePathsMemoizationHelper(r + 1, c, m, n, dp); // right
+    int down = uniquePathsMemoizationHelper(r, c + 1, m, n, dp);  // down
     return dp[r][c] = right + down;
 }
 
 // Memoization
 // Time Complexity: O(m*n), where m is the number of rows and n is the number of columns.
-// Space Complexity: O(m*n) for the dp array + O(m+n) for the recursion stack.
+// Space Complexity: O(m*n) for the dp array and O(m+n) for the recursion stack.
 int uniquePathsMemoization(int m, int n)
 {
-    vector<vector<int>> visited(m, vector<int>(n, 0));
     vector<vector<int>> dp(m, vector<int>(n, -1));
-    return uniquePathsMemoizationHelper(0, 0, m, n, visited, dp);
+    return uniquePathsMemoizationHelper(0, 0, m, n, dp);
 }
 
 // Tabulation
