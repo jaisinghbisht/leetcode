@@ -48,8 +48,8 @@ int uniquePathsMemoizationHelper(int r, int c, const int m, const int n, vector<
         return 0;
     if (dp[r][c] != -1)
         return dp[r][c];
-    int right = uniquePathsMemoizationHelper(r + 1, c, m, n, dp); // right
-    int down = uniquePathsMemoizationHelper(r, c + 1, m, n, dp);  // down
+    int right = uniquePathsMemoizationHelper(r + 1, c, m, n, dp); // down
+    int down = uniquePathsMemoizationHelper(r, c + 1, m, n, dp);  // right
     return dp[r][c] = right + down;
 }
 

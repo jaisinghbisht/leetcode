@@ -31,8 +31,8 @@ int uniquePathsRecursiveHelper(int r, int c, const int m, const int n, vector<ve
         return 1;
     if (r > m - 1 || c > n - 1 || obstacleGrid[r][c])
         return 0;
-    int right = uniquePathsRecursiveHelper(r + 1, c, m, n, obstacleGrid); // right
-    int down = uniquePathsRecursiveHelper(r, c + 1, m, n, obstacleGrid);  // down
+    int right = uniquePathsRecursiveHelper(r + 1, c, m, n, obstacleGrid); // down
+    int down = uniquePathsRecursiveHelper(r, c + 1, m, n, obstacleGrid);  // right
     return right + down;
 }
 
@@ -55,8 +55,8 @@ int uniquePathsRecursiveHelper(int r, int c, const int m, const int n, vector<ve
         return 0;
     if (dp[r][c] != -1)
         return dp[r][c];
-    int right = uniquePathsRecursiveHelper(r + 1, c, m, n, obstacleGrid, dp); // right
-    int down = uniquePathsRecursiveHelper(r, c + 1, m, n, obstacleGrid, dp);  // down
+    int right = uniquePathsRecursiveHelper(r + 1, c, m, n, obstacleGrid, dp); // down
+    int down = uniquePathsRecursiveHelper(r, c + 1, m, n, obstacleGrid, dp);  // right
     return dp[r][c] = right + down;
 }
 
