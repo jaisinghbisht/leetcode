@@ -32,7 +32,6 @@ bool isSubsetSumRecursiveHelper(int index, vector<int> &arr, int sum)
         return false;
     }
     return isSubsetSumRecursiveHelper(index + 1, arr, sum - arr[index]) || isSubsetSumRecursiveHelper(index + 1, arr, sum);
-    ;
 }
 
 // Recursive
